@@ -1,0 +1,128 @@
+{
+  "assistant": {
+    "unique_name": "deep-restaurant-tutorial",
+    "friendly_name": "Deep Restaurant Tutorial"
+  },
+  "task__get-specials": {
+    "unique_name": "get-specials",
+    "friendly_name": "Get the Daily Specials",
+    "actions": {
+      "actions": [
+        {
+          "say": "Todays special is duck confit with roasted brussel sprouts"
+        },
+        {
+          "listen": true
+        }
+      ]
+    },
+    "samples": [
+      "What's today's special?",
+      "What's today's specials?",
+      "what is the special today",
+      "do you have a special today",
+      "what do you have for special today",
+      "I want today's special",
+      "dinner special",
+      "today's special",
+      "get today's special",
+      "Can you tell me what's today's special",
+      "are there any specials",
+      "specials"
+    ]
+  },
+  "task__make-reservation": {
+    "unique_name": "make-reservation",
+    "friendly_name": "Make a Reservation",
+    "actions": {
+      "actions": [
+        {
+          "collect": {
+            "name": "make_reservation",
+            "questions": [
+              {
+                "question": {
+                  "say": "Great, I can help you with that. What's your first name?"
+                },
+                "name": "first_name",
+                "type": "Twilio.FIRST_NAME"
+              },
+              {
+                "question": {
+                  "say": "When day would you like your reservation for?"
+                },
+                "name": "date",
+                "type": "Twilio.DATE"
+              },
+              {
+                "question": {
+                  "say": "Great at what time?"
+                },
+                "name": "time",
+                "type": "Twilio.TIME"
+              },
+              {
+                "question": {
+                  "say": "For how many people"
+                },
+                "name": "party_size",
+                "type": "Twilio.NUMBER"
+              }
+            ],
+            "on_complete": {
+              "redirect": {
+                "uri": "https://jade-louse-2946.twil.io/deep-table",
+                "method": "POST"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "samples": [
+      {
+        "language": "en-US",
+        "tagged_text": "book a table"
+      },
+      {
+        "language": "en-US",
+        "tagged_text": "make a reservation"
+      },
+      {
+        "language": "en-US",
+        "tagged_text": "I want to make a reservation"
+      },
+      {
+        "language": "en-US",
+        "tagged_text": "I need a table"
+      },
+      {
+        "language": "en-US",
+        "tagged_text": "I want to book a table"
+      },
+      {
+        "language": "en-US",
+        "tagged_text": "I'd like to make a reservation please"
+      },
+      {
+        "language": "en-US",
+        "tagged_text": "I would like to make a reservation"
+      },
+      {
+        "language": "en-US",
+        "tagged_text": "I'm looking for a table for dinner"
+      },
+      {
+        "language": "en-US",
+        "tagged_text": "make reservation"
+      },
+      {
+        "language": "en-US",
+        "tagged_text": "make reservation please"
+      }
+    ]
+  },
+  "model": {
+    "unique_name": "v0.01"
+  }
+}
