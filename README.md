@@ -120,7 +120,7 @@ using everything defined in the rest of the JSON file.
 }
 ```
 
-See here for extra details: [Twilio ModelBuild Resource](https://www.twilio.com/docs/autopilot/api/model-build)
+See here for extra details: [Twilio ModelBuild Resource](https://www.twilio.com/docs/autopilot/api/model-build).
 
 
 ## Deploying your Chatbot
