@@ -106,7 +106,7 @@ contains the following information:
 }
 ```
 
-More details about these settings and additional settings are here: [Twilio Task Resource](https://www.twilio.com/docs/autopilot/api/task)
+More details about these settings and additional settings are here: [Twilio Task Resource](https://www.twilio.com/docs/autopilot/api/task).
 
 ### Basic Settings- model
 The last component of the JSON file is the "model".  The most build component tells Twilio to build the actual model 
@@ -336,7 +336,7 @@ Finally, the last segment we need in our JSON file is for `model` where we'll ju
 }
 ```
 
-Just like that we're almost done!  To check your JSON file should look like this [example](https://github.com/mvielkind/otto-bot/blob/master/examples/deep-table-tutorial.json)
+Just like that we're almost done!  To check your JSON file should look like this [example](https://github.com/mvielkind/otto-bot/blob/master/examples/deep-table-tutorial.json).
   
 There is one catch, one thing we cannot do with otto-bot is deploy Runtime functions,
 which the Deep Table tutorial does use, so we'll have to go into the console to create our function and make one more
