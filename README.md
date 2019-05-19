@@ -172,8 +172,8 @@ the bot our JSON file will need an assistant object, 2 tasks, and a model.  Our 
 ```json
 {
 "assistant": {
-  "unique_name": "deep-restaurant-tutorial",
-  "friendly_name": "Deep Restaurant Tutorial"
+  "unique_name": "deep-table-tutorial",
+  "friendly_name": "Deep Table Tutorial"
   }
 }
 ```
@@ -336,14 +336,14 @@ Finally, the last segment we need in our JSON file is for `model` where we'll ju
 }
 ```
 
-Just like that we're almost done!  To check your JSON file should look like this example.
+Just like that we're almost done!  To check your JSON file should look like this [example](https://github.com/mvielkind/otto-bot/blob/master/examples/deep-table-tutorial.json)
   
 There is one catch, one thing we cannot do with otto-bot is deploy Runtime functions,
 which the Deep Table tutorial does use, so we'll have to go into the console to create our function and make one more
 edit to our JSON before we can deploy.
 
 -Sign into the Twilio console and go to **Runtime -> Functions** and create a blank function
--Name the function *deep-table*
+-Name the function *deep-table* and make sure the file path is *deep-table*
 -Paste the code below and save
 
 ```javascript
@@ -379,4 +379,5 @@ otto-bot deploy deep-table-tutorial.json
 ```
 
 The last step is to go into the Twilio console and copy the Autopilot Assistant link to the webhook for your Twilio
-number.
+number.  Go to your Autopilot assistants in the Twilio console, click on the "Deep Restaurant Tutorial", select the
+"Programmable Messaging" channel, copy the URL, and paste it as the webhook for your Twilio number.
