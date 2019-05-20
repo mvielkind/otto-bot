@@ -164,54 +164,53 @@ deleted.
 
 ## Example Usage- Deep Table Restaurant Assistant
 One of the Twilio Autopilot tutorials demonstrates how you can build a bot to make reservations at a restaurant.  To
-show how otto-bot works I'm going to walkthrough how to recreate the tutorial using otto-bot.
+show how otto-bot works I'm going to walk through how to recreate the tutorial using otto-bot.  In this example we'll
+walk through how to configure the JSON file.  There will be 4 sections to the file, an assistant, task__get-specials and
+task__make-reservation for each of the two tasks for our assistant, and finally a section defining the model.  Let's
+get started by building the `assistant` portion of the JSON.  To help you can run `otto-bot init` to get a blank
+configuration file with some of the structure already in place where you can fill in the details where needed.
 
-The Deep Table Restaurant bot performs 2 tasks, it will tell the daily specials and make a reservation.  To replicate
-the bot our JSON file will need an assistant object, 2 tasks, and a model.  Our assistant portion should look like this:
+The `assistant` portion of our JSON should look like this:
 
-```json
-{
+```
 "assistant": {
   "unique_name": "deep-table-tutorial",
   "friendly_name": "Deep Table Tutorial"
   }
-}
 ```
 
 For the `assistant` we are just assigning a name to our assistant.  Next, we're going to create our first task,
 `get-specials` that will display the daily special when prompted.  To do this we need to add a new element to our JSON
 with the configuration for this task.
 
-```json
-{
-  "task__get-specials": {
-    "unique_name": "get-specials",
-    "friendly_name": "Get the Daily Specials",
-    "actions": {
-      "actions": [
-        {
-          "say": "Todays special is duck confit with roasted brussel sprouts"
-        },
-        {
-          "listen": true
-        }
-      ]
+```
+"task__get-specials": {
+"unique_name": "get-specials",
+"friendly_name": "Get the Daily Specials",
+"actions": {
+  "actions": [
+    {
+      "say": "Todays special is duck confit with roasted brussel sprouts"
     },
-    "samples": [
-      "What's today's special?",
-      "What's today's specials?",
-      "what is the special today",
-      "do you have a special today",
-      "what do you have for special today",
-      "I want today's special",
-      "dinner special",
-      "today's special",
-      "get today's special",
-      "Can you tell me what's today's special",
-      "are there any specials",
-      "specials"
-    ]
-  }
+    {
+      "listen": true
+    }
+  ]
+},
+"samples": [
+  "What's today's special?",
+  "What's today's specials?",
+  "what is the special today",
+  "do you have a special today",
+  "what do you have for special today",
+  "I want today's special",
+  "dinner special",
+  "today's special",
+  "get today's special",
+  "Can you tell me what's today's special",
+  "are there any specials",
+  "specials"
+]
 }
 ```
 
@@ -222,100 +221,97 @@ The second task is `make-reservation`.  In this task the bot will collect inform
 desired date/time for the reservation, and party size.  To incorporate this task we'll add another component to our
 JSON file:
 
-```json
-{
-  "task__make-reservation":
-    {
-      "unique_name": "make-reservation",
-      "friendly_name": "Make a Reservation",
-      "actions": {
-        "actions": [
-          {
-            "collect": {
-              "name": "make_reservation",
-              "questions": [
-                {
-                  "question": {
-                    "say": "Great, I can help you with that. What's your first name?"
-                  },
-                  "name": "first_name",
-                  "type": "Twilio.FIRST_NAME"
-                },
-                {
-                  "question": {
-                    "say": "When day would you like your reservation for?"
-                  },
-                  "name": "date",
-                  "type": "Twilio.DATE"
-                },
-                {
-                  "question": {
-                    "say": "Great at what time?"
-                  },
-                  "name": "time",
-                  "type": "Twilio.TIME"
-                },
-                {
-                  "question": {
-                    "say": "For how many people"
-                  },
-                  "name": "party_size",
-                  "type": "Twilio.NUMBER"
-                }
-              ],
-              "on_complete": {
-                "redirect": {
-                  "uri": "REPLACE THIS!!!",
-                  "method": "POST"
-                }
-              }
+```
+"task__make-reservation": {
+  "unique_name": "make-reservation",
+  "friendly_name": "Make a Reservation",
+  "actions": {
+    "actions": [
+      {
+        "collect": {
+          "name": "make_reservation",
+          "questions": [
+            {
+              "question": {
+                "say": "Great, I can help you with that. What's your first name?"
+              },
+              "name": "first_name",
+              "type": "Twilio.FIRST_NAME"
+            },
+            {
+              "question": {
+                "say": "When day would you like your reservation for?"
+              },
+              "name": "date",
+              "type": "Twilio.DATE"
+            },
+            {
+              "question": {
+                "say": "Great at what time?"
+              },
+              "name": "time",
+              "type": "Twilio.TIME"
+            },
+            {
+              "question": {
+                "say": "For how many people"
+              },
+              "name": "party_size",
+              "type": "Twilio.NUMBER"
+            }
+          ],
+          "on_complete": {
+            "redirect": {
+              "uri": "REPLACE THIS!!!",
+              "method": "POST"
             }
           }
-        ]
-      },
-      "samples": [
-        {
-          "language": "en-US",
-          "tagged_text": "book a table"
-        },
-        {
-          "language": "en-US",
-          "tagged_text": "make a reservation"
-        },
-        {
-          "language": "en-US",
-          "tagged_text": "I want to make a reservation"
-        },
-        {
-          "language": "en-US",
-          "tagged_text": "I need a table"
-        },
-        {
-          "language": "en-US",
-          "tagged_text": "I want to book a table"
-        },
-        {
-          "language": "en-US",
-          "tagged_text": "I'd like to make a reservation please"
-        },
-        {
-          "language": "en-US",
-          "tagged_text": "I would like to make a reservation"
-        },
-        {
-          "language": "en-US",
-          "tagged_text": "I'm looking for a table for dinner"
-        },
-        {
-          "language": "en-US",
-          "tagged_text": "make reservation"
-        },
-        {
-          "language": "en-US",
-          "tagged_text": "make reservation please"
         }
-      ]
+      }
+    ]
+  },
+  "samples": [
+    {
+      "language": "en-US",
+      "tagged_text": "book a table"
+    },
+    {
+      "language": "en-US",
+      "tagged_text": "make a reservation"
+    },
+    {
+      "language": "en-US",
+      "tagged_text": "I want to make a reservation"
+    },
+    {
+      "language": "en-US",
+      "tagged_text": "I need a table"
+    },
+    {
+      "language": "en-US",
+      "tagged_text": "I want to book a table"
+    },
+    {
+      "language": "en-US",
+      "tagged_text": "I'd like to make a reservation please"
+    },
+    {
+      "language": "en-US",
+      "tagged_text": "I would like to make a reservation"
+    },
+    {
+      "language": "en-US",
+      "tagged_text": "I'm looking for a table for dinner"
+    },
+    {
+      "language": "en-US",
+      "tagged_text": "make reservation"
+    },
+    {
+      "language": "en-US",
+      "tagged_text": "make reservation please"
     }
+  ]
 }
 ```
 
@@ -328,11 +324,9 @@ and paste the link here since Runtime functions cannot be deploy via the API, so
 
 Finally, the last segment we need in our JSON file is for `model` where we'll just provide a name for our model.
 
-```json
-{
-  "model": {
-    "unique_name": "v0.01"
-  }
+```
+"model": {
+  "unique_name": "v0.01"
 }
 ```
 
