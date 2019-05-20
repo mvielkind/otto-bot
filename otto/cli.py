@@ -72,7 +72,12 @@ def deploy(config_loc, overwrite):
     :return:
     """
     # Setup the Twilio client with the provided authorization.
-    client = setup_twilio_client()
+    response = setup_twilio_client()
+    if not response["STATUS"]:
+        echo_format_msg(response["Message"])
+        exit()
+
+    client = response["Payload"]
 
     # Load and validate the configuration file.
     config = json.load(open(config_loc, "r"))

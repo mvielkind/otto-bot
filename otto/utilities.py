@@ -1,7 +1,7 @@
 import os
 import click
 from twilio.rest import Client
-from click.exceptions import ClickException
+from twilio.base.exceptions import TwilioException
 
 
 def get_attribute_config_items(config, attribute):
@@ -13,32 +13,41 @@ def setup_twilio_client():
     Sets up the Twilio client that will be used based on the authentication of the user.
     :return: Returns a Twilio Client object.
     """
-    # TODO: Handle when Twilio authentication fails.
+    response = {
+        "STATUS": "PASS"
+    }
     try:
         account_sid = os.environ["TWILIO_ACCOUNT_SID"]
         auth_token = os.environ["TWILIO_AUTH_TOKEN"]
 
         client = Client(account_sid, auth_token)
-    except KeyError as e:
-        raise ClickException("Missing authentication environmental variable '{}'.".format(e))
 
-    return client
+        # Capture if authentication failed.
+        client.autopilot.assistants.list()
+
+        response["Payload"] = client
+    except KeyError as e:
+        response["STATUS"] = "FAIL"
+        response["Message"] = "FAIL: Check that your Twilio environmental variables have been configred correctly."
+    except TwilioException:
+        response["STATUS"] = "FAIL"
+        response["Message"] = "FAIL: Double check your Twilio credentials are correct."
+
+    return response
 
 
 def get_assistant_names(client):
     """
-
-    :param client:
-    :return:
+    Gets the names of all the assistants associated with the Twilio client.
+    :param client: Twilio client object.
     """
     return [assistant.unique_name for assistant in client.autopilot.assistants.list()]
 
 
 def echo_format_msg(msg):
     """
-
-    :param msg:
-    :return:
+    Colors a message according to the status that is implied.
+    :param msg: Text of message to color.
     """
     color_map = {
         "INFO": "blue",
