@@ -59,7 +59,7 @@ class InputValidation:
                 except AssertionError:
                     collect_action = ta["collect"]["on_complete"]
                     str_exists = ", ".join(collect_action.keys())
-                    msg = "FAIL: In {} the `on_complete` action for `collect` must be a `redirect`.  You used a `{}` action".\
+                    msg = "FAIL: In `{}` the `on_complete` action for `collect` must be a `redirect`.  You used a `{}` action".\
                         format(lbl, str_exists)
                     echo_format_msg(msg)
                     self.validation_pass = False
@@ -68,7 +68,7 @@ class InputValidation:
             action_counts = Counter([list(action.keys())[0] for action in task_actions])
             for action, counts in action_counts.items():
                 if counts > 1:
-                    msg = "FAIL: In task {} you have multiple {} actions. Can only have one.".format(lbl, action)
+                    msg = "FAIL: In task `{}` you have multiple `{}` actions. Can only have one.".format(lbl, action)
                     echo_format_msg(msg)
                     self.validation_pass = False
 
@@ -81,7 +81,7 @@ class InputValidation:
                 echo_format_msg(msg)
                 self.validation_pass = False
             elif n_samples < 10:
-                msg = "INFO: Task {} only has {} samples.  Recommended to have at least 10.".format(lbl, str(n_samples))
+                msg = "INFO: Task `{}` only has `{}` samples.  Recommended to have at least 10.".format(lbl, str(n_samples))
                 echo_format_msg(msg)
         except KeyError:
             msg = "FAIL: There are no samples provided for '{}'".format(lbl)
@@ -113,7 +113,7 @@ class InputValidation:
 
         if missing_fields:
             missing_fields_str = ", ".join(list(set(missing_fields)))
-            msg = "FAIL: Task {} contains undefined custom fields.  Make sure your task includes these fields: {}".\
+            msg = "FAIL: Task `{}` contains undefined custom fields.  Make sure your task includes these fields: `{}`".\
                 format(lbl, missing_fields_str)
             echo_format_msg(msg)
             self.validation_pass = False
@@ -127,7 +127,7 @@ class InputValidation:
         # Check that defaults are defined correctly in Assistant.
         if "defaults" in assistant:
             if "defaults" not in assistant["defaults"]:
-                msg = "FAIL: The `defaults` parameter for Assistant {} is not formed properly.".format(lbl)
+                msg = "FAIL: The `defaults` parameter for Assistant `{}` is not formed properly.".format(lbl)
                 echo_format_msg(msg)
                 self.validation_pass = False
             else:
@@ -144,7 +144,7 @@ class InputValidation:
         """
         # Raise a warning if no values associated with a field type.
         if ("values" not in assistant) or (len(assistant["values"]) == 0):
-            msg = "INFO: Custom Field Type {} has no values associated with it.".format(lbl)
+            msg = "INFO: Custom Field Type `{}` has no values associated with it.".format(lbl)
             echo_format_msg(msg)
 
     def validate_input(self):
@@ -159,7 +159,7 @@ class InputValidation:
         for tag, attributes in self.config.items():
             click.echo("\nValidating `{}`...".format(tag))
             if "unique_name" not in attributes:
-                msg = "FAIL: {} does not have a 'unique_name'".format(tag)
+                msg = "FAIL: `{}` does not have a 'unique_name'".format(tag)
                 echo_format_msg(msg)
                 self.validation_pass = False
 
