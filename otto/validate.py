@@ -1,5 +1,6 @@
 import re
 import click
+from collections import Counter
 from otto.utilities import echo_format_msg
 
 
@@ -37,15 +38,39 @@ class InputValidation:
             - At least 1 sample.
             - A Field if custom field identified in samples
             - If a custom field exists in a sample there must be a corresponding field resource in the task
+            - If task has a `collect` action make sure `on_complete` is a `redirect` action.
+            - A task cannot have multiple instances of the same action.
         """
         if "actions" not in task:
             msg = "INFO: Task `{}` has no actions associated with it.".format(lbl)
             echo_format_msg(msg)
+        elif "actions" not in task["actions"]:
+            msg = "FAIL: Actions object in task `{}` is misformed.".format(lbl)
+            echo_format_msg(msg)
+            self.validation_pass = False
         else:
-            if "actions" not in task["actions"]:
-                msg = "FAIL: Actions object in task `{}` is misformed.".format(lbl)
-                echo_format_msg(msg)
-                self.validation_pass = False
+            task_actions = task["actions"]["actions"]
+            for ta in task_actions:
+                try:
+                    collect_action = ta["collect"]["on_complete"]
+                    assert list(collect_action.keys()) == ["redirect"]
+                except KeyError:
+                    continue
+                except AssertionError:
+                    collect_action = ta["collect"]["on_complete"]
+                    str_exists = ", ".join(collect_action.keys())
+                    msg = "FAIL: In {} the `on_complete` action for `collect` must be a `redirect`.  You used a `{}` action".\
+                        format(lbl, str_exists)
+                    echo_format_msg(msg)
+                    self.validation_pass = False
+
+            # Check if actions are repeated in the task.
+            action_counts = Counter([list(action.keys())[0] for action in task_actions])
+            for action, counts in action_counts.items():
+                if counts > 1:
+                    msg = "FAIL: In task {} you have multiple {} actions. Can only have one.".format(lbl, action)
+                    echo_format_msg(msg)
+                    self.validation_pass = False
 
         # Check if task has samples associated with it.
         try:
@@ -118,7 +143,7 @@ class InputValidation:
         alert when values are missing since they aren't really useful without defining values.
         """
         # Raise a warning if no values associated with a field type.
-        if ("values" not in assistant) or (len(assistant["values"] == 0)):
+        if ("values" not in assistant) or (len(assistant["values"]) == 0):
             msg = "INFO: Custom Field Type {} has no values associated with it.".format(lbl)
             echo_format_msg(msg)
 
