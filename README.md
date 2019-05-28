@@ -16,10 +16,11 @@ and setting up your environmental variables [here](https://www.twilio.com/blog/2
 Once you have your Twilio account setup, otto-bot can be installed via `pip`:
 
 ```bash
-pip3 install otto-bot
+pip install otto-bot
 ```
 
-otto-bot is only configured to work with Python 3.6 and above.
+otto-bot is only configured to work with Python 3.6 and above.  If you have both a Python 2 and Python 3 version 
+installed you might need to run the command above using `pip3` instead of `pip`.
 
 Now you're ready to go!
 
