@@ -19,6 +19,8 @@ Once you have your Twilio account setup, otto-bot can be installed via `pip`:
 pip3 install otto-bot
 ```
 
+otto-bot is only configured to work with Python 3.6 and above.
+
 Now you're ready to go!
 
 ## Configuring your Chatbot
@@ -134,7 +136,8 @@ deployment to agree to overwrite the existing bot.
 Before deploying the bot a number of validation checks are run on the input file to ensure there are no errors.  These
 checks ensure that your bot will successfully deploy without an error before anything starts to get deleted.  In 
 addition to doing the error checking alerts will be raised about best practices that aren't necessarily errors, but
-that could help improve your bot.
+that could help improve your bot.  These checks will capture many common errors, but are not entirely robust.  As new
+errors are discovered I'll keep these validation checks up-to-date.
 
 ### Deployment Limitations
 otto-bot handles a lot, but not all aspects of your bot's deployment.  Twilio currently does not have an API for 
@@ -159,6 +162,12 @@ deleted.
 
 ## Getting Started- Examples
 
-In the [examples/](https://github.com/mvielkind/otto-bot/tree/master/examples) directory there is a worked 
+In the [examples](https://github.com/mvielkind/otto-bot/tree/master/examples) directory there is a worked 
 example using the Twilio [Deep Table Autopilot Tutorial](https://www.twilio.com/docs/autopilot/tutorials/deep-table-restaurant-assistant)
 , demonstrating how otto-bot can be utilized.
+
+
+## What's Next
+I've learned a lot about Twilio Autopilot through this process.  From this process there are a number of initial 
+enhancements I want to add.  If there is any other functionality you'd like to see let me know and I'll make sure it
+gets added!

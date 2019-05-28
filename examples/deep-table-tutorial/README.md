@@ -1,4 +1,5 @@
-One of the Twilio Autopilot tutorials demonstrates how you can build a bot to make reservations at a restaurant.  To
+One of the popular Twilio Autopilot tutorials is [Deep Table](https://www.twilio.com/docs/autopilot/tutorials/deep-table-restaurant-assistant)
+demonstrating how you can build an Autopilot assistant to make reservations at a restaurant.  To
 show how otto-bot works I'm going to walk through how to recreate the tutorial using otto-bot.  In this example we'll
 walk through how to configure the JSON file.  There will be 4 sections to the file, an assistant, task__get-specials and
 task__make-reservation for each of the two tasks for our assistant, and finally a section defining the model.  Let's
@@ -171,9 +172,9 @@ There is one catch, one thing we cannot do with otto-bot is deploy Runtime funct
 which the Deep Table tutorial does use, so we'll have to go into the console to create our function and make one more
 edit to our JSON before we can deploy.
 
--Sign into the Twilio console and go to **Runtime -> Functions** and create a blank function
--Name the function *deep-table* and make sure the file path is *deep-table*
--Paste the code below and save
+- Sign into the Twilio console and go to **Runtime -> Functions** and create a blank function
+- Name the function *deep-table* and make sure the file path is *deep-table*
+- Paste the code below and save
 
 ```javascript
 exports.handler = function(context, event, callback) {
