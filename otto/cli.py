@@ -56,7 +56,7 @@ def init():
         }
     }
 
-    with open("model-deploy-no-tasks.json", "w") as f:
+    with open("otto-bot-template", "w") as f:
         json.dump(copilot_settings, f, indent='\t')
 
 
