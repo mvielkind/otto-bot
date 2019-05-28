@@ -50,8 +50,7 @@ object all the other components will be linked to to create the bot.  The assist
 bot and some of the default behaviors.
 
 ```
-{
-  "assistant": {
+"assistant": {
     "unique_name": "", # Required.  A name to uniquely identify your bot.
     "friendly_name": "", # Optional.  A more descriptive name defining the bot.
     "defaults": { # Optional.  Assigns default actions.
@@ -63,7 +62,6 @@ bot and some of the default behaviors.
         }
       }
     }
-  }
 }
 ```
 
@@ -76,12 +74,10 @@ In the configuration file each field_type is defined with a prefix "field_type__
 example definition is below:
 
 ```
-{
-  "field_type__your_custom_field": {
+"field_type__your_custom_field": {
     "unique_name": "", # Required.  Unique name identifying your custom field type.
     "friendly_name": "", # Optional.  A more descriptive name defining the field type.  
-    "values": [] # Required.  A list of values defining the field.
-  }
+    "values": [] # Required.  A list of values defining the field. 
 }
 ```
 
@@ -92,8 +88,7 @@ Tasks are the core of what dictates how your chatbot will interact with messages
 one task.  In the JSON file each a task is defined with the "task__" prefix and contains the following information:
 
 ```
-{
-  "task__your_task": {
+"task__your_task": {
     "unique_name": "", # Required.  Unique name identifying the task.
     "friendly_name": "", # Optional.  Most descriptive name defining the task.
     "actions": { # Required.  A list of actions your task should take.
@@ -106,7 +101,6 @@ one task.  In the JSON file each a task is defined with the "task__" prefix and 
       }
     ],
     "samples": [] # Required.  List of key phrases that will trigger this task.
-  }
 }
 ```
 
@@ -117,10 +111,8 @@ The last component of the JSON file is the "model".  The most build component te
 using everything defined in the rest of the JSON file.
 
 ```
-{
-  "model": {
+"model": {
     "unique_name": "" # Required.  Unique name to identify the model.
-  }
 }
 ```
 
