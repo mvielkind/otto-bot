@@ -139,7 +139,12 @@ def teardown(autopilot_sid):
     :param autopilot_sid: The unique identifier of the bot.
     :return:
     """
-    client = setup_twilio_client()
+    response = setup_twilio_client()
+    if not response["STATUS"]:
+        echo_format_msg(response["Message"])
+        exit()
+
+    client = response["Payload"]
 
     # Get the assistant.  Raise error if doesn't exist.
     try:
