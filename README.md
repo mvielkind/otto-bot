@@ -6,6 +6,12 @@ its own CLI utility, the primary motivation for this library was to help me lear
 packages to PyPi.  otto-bot is the outcome of that learning experience that I hope others may find beneficial as 
 well!
 
+The library won't handle all features of building an Autopilot bot.  For instance, there is not an API (at least that I
+know of) for deploying custom Twilio Runtime Functions, so those will have to be deployed via the Twilio Console.  I'm 
+going to try to keep up with changes to the Twilio API, changes in the API could impact performance.  While working
+through this project I identified a bunch of cool features to add-on that I'm planning on, so look forward to some
+future updates!
+
 
 ## Getting Started
 
